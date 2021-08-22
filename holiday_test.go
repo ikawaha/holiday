@@ -12,7 +12,7 @@ func Test_CatalogData(t *testing.T) {
 }
 
 func TestIsHolidayGolden(t *testing.T) {
-	for date, _ := range Catalog {
+	for date := range Catalog {
 		tm, err := time.Parse(DateFormat, date)
 		if err != nil {
 			t.Errorf("unexpected error, invalid date format: %s", date)
@@ -24,7 +24,7 @@ func TestIsHolidayGolden(t *testing.T) {
 }
 
 func TestIsHolidayYYYYMMDDGolden(t *testing.T) {
-	for date, _ := range Catalog {
+	for date := range Catalog {
 		if _, got := IsHolidayYYYYMMDD(date); got == false {
 			t.Errorf("IsHolidayYYYYMMDD(%q) = %v, want true", date, got)
 		}

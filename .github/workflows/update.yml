@@ -26,6 +26,6 @@ jobs:
           DATE=`date +"%Y%m%d"`
           git switch -c "update_$DATE"
           git add holidays.json
-          git diff --cached --quiet || hub pull-request -b main -m "Update holidays"
+          git diff --cached --quiet || hub pull-request -p -b main -m "Update holidays"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,5 +1,4 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/ikawaha/holiday.svg)](https://pkg.go.dev/github.com/ikawaha/holiday)
-![Go](https://github.com/ikawaha/holiday/workflows/Go/badge.svg)
 
 # holiday
 

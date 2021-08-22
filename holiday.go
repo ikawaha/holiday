@@ -6,17 +6,19 @@ import (
 	"time"
 )
 
+// Holidays represents a holidays map.
 type Holidays map[string]string
 
+// DateFormat is the date format of the key of the Holidays type.
+const DateFormat = `2006/01/02`
+
 var (
-	// Catalog is the list of National Holidays.
+	// Catalog is the list of national holidays.
 	Catalog Holidays
 
 	//go:embed holidays.json
 	holidaysJSON []byte
 )
-
-const DateFormat = `2006/01/02`
 
 func init() {
 	Catalog = func() Holidays {

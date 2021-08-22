@@ -21,7 +21,7 @@ func HolidayCSV() ([][]string, error) {
 	client := http.Client{
 		Timeout: 30 * time.Second,
 	}
-	resp, err := client.Get(holidayJPURI)
+	resp, err := client.Get(holidayJPURI) //nolint:noctx
 	if err != nil {
 		return nil, err
 	}

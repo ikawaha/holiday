@@ -27,6 +27,6 @@ jobs:
           BRANCH="update_$DATE"
           git switch -c $BRANCH
           git add holidays.json
-          git diff --cached --quiet || git commit -m "Update holidays" || git push origin $BRANCH || hub pull-request -b main -m "Update holidays"
+          git diff --cached --quiet || git commit -m "Update holidays"; git push origin $BRANCH; hub pull-request -b main -m "Update holidays"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

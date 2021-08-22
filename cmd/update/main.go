@@ -34,7 +34,7 @@ func run() error {
 		return err
 	}
 	if !bytes.Equal(newer, old) {
-		if err := os.WriteFile(holidayData, newer, 0666); err != nil {
+		if err := os.WriteFile(holidayData, newer, 0600); err != nil {
 			return err
 		}
 	}

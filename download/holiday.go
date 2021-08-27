@@ -2,6 +2,7 @@ package download
 
 import (
 	"bytes"
+	"context"
 	"encoding/csv"
 	"fmt"
 	"io"
@@ -17,11 +18,15 @@ import (
 const holidayJPURI = "https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv"
 
 // HolidayCSV downloads the csv file of the national holidays from a Cabinet Office page.
-func HolidayCSV() ([][]string, error) {
+func HolidayCSV(ctx context.Context) ([][]string, error) {
 	client := http.Client{
 		Timeout: 30 * time.Second,
 	}
-	resp, err := client.Get(holidayJPURI) //nolint:noctx
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, holidayJPURI, nil)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := client.Do(req)
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +44,7 @@ const csvDateFormat = `2006/1/2`
 
 // Holidays downloads the national holidays from a Cabinet Office page and return it.
 func Holidays() (holiday.Holidays, error) {
-	records, err := HolidayCSV()
+	records, err := HolidayCSV(context.Background())
 	if err != nil {
 		return nil, err
 	}

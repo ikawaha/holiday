@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -21,7 +22,7 @@ func main() {
 }
 
 func run() error {
-	h, err := download.Holidays()
+	h, err := download.Holidays(context.Background())
 	if err != nil {
 		return err
 	}

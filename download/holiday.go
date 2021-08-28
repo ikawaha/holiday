@@ -43,8 +43,8 @@ func HolidayCSV(ctx context.Context) ([][]string, error) {
 const csvDateFormat = `2006/1/2`
 
 // Holidays downloads the national holidays from a Cabinet Office page and return it.
-func Holidays() (holiday.Holidays, error) {
-	records, err := HolidayCSV(context.Background())
+func Holidays(ctx context.Context) (holiday.Holidays, error) {
+	records, err := HolidayCSV(ctx)
 	if err != nil {
 		return nil, err
 	}

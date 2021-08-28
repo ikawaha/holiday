@@ -13,8 +13,9 @@ type Holidays map[string]string
 const DateFormat = `2006/01/02`
 
 var (
-	// Catalog is the list of national holidays.
-	Catalog Holidays
+	// Catalog is the list of national holidays. In the init(), holidays.json
+	// will be loaded for initialization.
+	Catalog = Holidays{}
 
 	//go:embed holidays.json
 	holidaysJSON []byte

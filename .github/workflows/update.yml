@@ -27,9 +27,14 @@ jobs:
           BRANCH="update_$DATE"
           git add holidays.json
 
+      - name: Diff
+        id: diff
+        run: |
+          git diff --cached --quiet
+
       - name: Create PR if there are any updates
         id: create_pr
-        if: `git diff --cached --quiet`
+        if: steps.diff.conclusion == 'success'
         run: |
           git switch -c $BRANCH &&\
           git commit -m "Update holidays" &&\

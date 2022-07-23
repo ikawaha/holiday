@@ -16,32 +16,32 @@ jobs:
         with:
           go-version: 1.18
 
+      - name: Update
+        run: go run github.com/ikawaha/holiday/cmd/update@latest
+
       - name: Git setting
         run: |
           git config --local user.email "ikawaha@users.noreply.github.com"
           git config --local user.name "ikawaha"
 
-      - name: Update and check for diff
-        id: diff
-        run: |
-          go run github.com/ikawaha/holiday/cmd/update@latest
-          git add holidays.json
-          git diff --cached --quiet
-
-      - name: Create PR if there are any updates
-        id: create_pr
-        if: steps.diff.conclusion == 'success'
+      - name: Create pull request
+        id: commit
         run: |
           DATE=`date +"%Y%m%d"`
           BRANCH="update_$DATE"
-          git switch -c $BRANCH &&\
-          git commit -m "Update holidays" &&\
-          git push origin $BRANCH &&\
+          git add holidays.json
+          git switch -c $BRANCH
+          git commit -m "Update holidays"
+          git push origin $BRANCH
+
+      -name: Create PR
+        if: steps.commit.conclusion == 'success'
+        run: |
           hub pull-request -b main -m "Update holidays"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Log
-        if: steps.create_pr.conclusion == 'skipped'
+        if: steps.commit.conclusion == 'failed'
         run: |
           git commit --allow-empty -m "log: check for updates, no differences"

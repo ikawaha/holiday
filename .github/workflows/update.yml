@@ -47,4 +47,4 @@ jobs:
         if: steps.commit.outcome == 'failure'
         run: |
           git commit --allow-empty -m "log: check for updates, no differences"
-          git push origin main
+          git push

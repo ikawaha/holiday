@@ -34,7 +34,7 @@ jobs:
           git commit -m "Update holidays"
           git push origin $BRANCH
 
-      -name: Create PR
+      - name: Create PR
         if: steps.commit.conclusion == 'success'
         run: |
           hub pull-request -b main -m "Update holidays"

@@ -36,13 +36,13 @@ jobs:
           git push origin $BRANCH
 
       - name: Create PR
-        if: steps.commit.conclusion == 'success'
+        if: steps.commit.outcome == "success"
         run: |
           hub pull-request -b main -m "Update holidays"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Log
-        if: steps.commit.conclusion == 'failed'
+        if: steps.commit.outcome == "failure"
         run: |
           git commit --allow-empty -m "log: check for updates, no differences"

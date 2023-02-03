@@ -15,7 +15,7 @@ import (
 )
 
 // see. https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html
-const holidayJPURI = "https://www8.cao.go.jp/chosei/shukujitsu/shukujitsu.csv"
+const holidayJPURI = "https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv"
 
 // HolidayCSV downloads the csv file of the national holidays from a Cabinet Office page.
 func HolidayCSV(ctx context.Context) ([][]string, error) {
@@ -31,6 +31,9 @@ func HolidayCSV(ctx context.Context) ([][]string, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if resp.StatusCode/100 != 2 {
+		return nil, fmt.Errorf("response status is not 2XX, %s", resp.Status)
+	}
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err

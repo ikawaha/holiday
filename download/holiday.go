@@ -31,6 +31,9 @@ func HolidayCSV(ctx context.Context) ([][]string, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if resp.StatusCode/100 != 2 {
+		return nil, fmt.Errorf("response status is not 2XX, %s", resp.Status)
+	}
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err

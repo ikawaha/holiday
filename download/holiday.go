@@ -15,7 +15,7 @@ import (
 )
 
 // see. https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html
-const holidayJPURI = "https://www8.cao.go.jp/chosei/shukujitsu/shukujitsu.csv"
+const holidayJPURI = "https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv"
 
 // HolidayCSV downloads the csv file of the national holidays from a Cabinet Office page.
 func HolidayCSV(ctx context.Context) ([][]string, error) {

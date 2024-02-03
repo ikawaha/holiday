@@ -33,7 +33,7 @@ jobs:
           git add holidays.json
           git switch -c $BRANCH
           git commit -m "Update holidays"
-          git push origin $BRANCH
+          git push -f origin $BRANCH
 
       - name: Create PR
         if: steps.commit.outcome == 'success'

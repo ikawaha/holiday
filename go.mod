@@ -1,5 +1,5 @@
 module github.com/ikawaha/holiday
 
-go 1.17
+go 1.25.0
 
-require golang.org/x/text v0.19.0
+require golang.org/x/text v0.38.0
